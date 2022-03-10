@@ -6,33 +6,37 @@ var puntuacion=0;
 var play=1;
 var end=0;
 var gameState=play;
-var obstaclesGroups;
+var obstaclesGroups; // falta el grupo de las nubes 
 var gameOver;
 var restart;
+// falta esta groundImage
+// falta el fondo 
 
 
 function preload(){
+ // te falta el fondo!!  backgroundImg = loadImage("backgroundImg.png") 
 obstaculo1=loadImage("obstacle1.png");
 obstaculo2=loadImage("obstacle2.png");
 obstaculo3=loadImage("obstacle3.png");
 obstaculo4=loadImage("obstacle4.png");
 obstaculo5=loadImage("obstacle5.png");
 obstaculo6=loadImage("obstacle6.png");
-gameOver.loadImage(gameOver.png);
-restart.loadImage(restart.png);
+gameOver.loadImage(gameOver.png); // aqui falta poner comillas! y hay que quitar el punto es = 
+restart.loadImage(restart.png); // aqui falta poner comillas! y hay que quitar el punto es = 
   trex_running=loadAnimation("trex1.png","trex3.png","trex4.png");
 groundImage=loadImage("ground2.png");
 imagenNubes=loadImage("cloud.png");
+  // trex_collided = loadAnimation("trex_collided.png"); FALTA ESTE 
 }
 
 function setup(){
 
-  createCanvas(600,200)
+  createCanvas(600,200) // CAMBIAMOS LOS VALORES POR: windowWidth, windowHeight
 
 console.log("hola"+"jugador");
 obstaclesGroups=new Group();
 cloudsGroups=new Group();
-
+// hay que agregar el sol! 
 
   
 trex=createSprite(50,160,20,50);
@@ -47,14 +51,14 @@ invisibleGround.visible=false;
 
 ground.X=ground.width/2;
 restart=createSprite(300,140);
-restart.addImage
+restart.addImage // esta instruccion esta incompleta, hay que poner el nombre de la imagen
 gameOver=createSprite(300,140);
-gameOver.addImage("gameOver",gameOverImage);
+gameOver.addImage("gameOver",gameOverImage);  // el nombre de la variable dentro del parentesis no la declaraste
 }
 
 
 function draw(){
-  background("white");
+  background("white"); // aqui cambiamos el color por la imagen de la variable fondo
 text("score"+puntuacion,500,50);
 
 if (gameState===play){
@@ -64,7 +68,11 @@ if (gameState===play){
   if(ground.x<0){
     ground.x=ground.width/2;
   }
-  if (keyDown("space")&&trex.y>=100) { trex.velocityY = -10; }
+  if (keyDown("space")&&trex.y>=100) { trex.velocityY = -10; } // esta instrucción esta mal 
+  //  if((touches.length > 0 || keyDown("SPACE")) && trex.y  >= height-120) 
+   //trex.velocityY = -10;      te falta esta
+     //  touches = [];         te falta esta 
+  // } cierra corchetes 
   trex.velocityY=trex.velocityY +0.8 ;
   randomNubesaleatorias();
 obstaculosRandoms ();
@@ -76,8 +84,10 @@ if (obstaclesGroups.isTouching(trex)){
 
 else if (gameState===end){
   ground.velocityX=0;
+  //  trex.velocityY = 0; // falta esta instrucción 
 obstaclesGroups.setVelocityXEach(0);
 cloudsGroups.setVelocityXEach(0);
+  // trex.changeAnimation("collided",trex_collided); // falta esta instrucción 
 }
 
 trex.collide(invisibleGround);
